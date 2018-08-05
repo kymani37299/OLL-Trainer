@@ -25,6 +25,7 @@ public class TrainActivity extends AppCompatActivity {
     private SimpleChronometer cTimer;
     private boolean timerRunning = false;
     private TextView tvScramble;
+    private LinearLayout mainLayout;
 
     private ArrayList<OLLCase> selectedCases;
 
@@ -35,12 +36,25 @@ public class TrainActivity extends AppCompatActivity {
 
         cTimer = findViewById(R.id.timer);
         tvScramble = findViewById(R.id.scramble_text);
+        mainLayout = findViewById(R.id.train_layout);
 
         selectedCases = MainActivity.getSelectedCases();
 
         OLLCase randomCase = selectedCases.get(rand.nextInt(selectedCases.size()));
 
         tvScramble.setText(randomCase.getScramble());
+
+        mainLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(timerRunning) {
+                    cTimer.stop();
+                    OLLCase randomCase = selectedCases.get(rand.nextInt(selectedCases.size()));
+                    tvScramble.setText(randomCase.getScramble());
+                }
+                return false;
+            }
+        });
 
     }
 
