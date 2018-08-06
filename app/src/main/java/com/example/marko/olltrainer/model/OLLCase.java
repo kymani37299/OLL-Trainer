@@ -49,6 +49,15 @@ public class OLLCase {
         return scrambles.get(ind);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof OLLCase) {
+            OLLCase ollCase = (OLLCase) obj;
+            return ollCase.getCaseName().equals(this.getCaseName());
+        }
+        return super.equals(obj);
+    }
+
     public static ArrayList<OLLCase> deserialize_cases(MainActivity mainInstance) {
         ArrayList<OLLCase> cases = new ArrayList<OLLCase>();
         try {

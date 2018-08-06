@@ -2,6 +2,7 @@ package com.example.marko.olltrainer;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,8 +38,7 @@ public class OLLCaseAdapter extends ArrayAdapter<OLLCase> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        String name = getItem(position).getCaseName();
-        String imagePath = getItem(position).getImagePath();
+        OLLCase ollCase = getItem(position);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource,parent,false);
@@ -47,10 +47,14 @@ public class OLLCaseAdapter extends ArrayAdapter<OLLCase> {
         ImageView ivCaseImage = convertView.findViewById(R.id.list_image_item);
 
 
-        int resourceId = mContext.getResources().getIdentifier(imagePath, "drawable", mContext.getPackageName());
+        int resourceId = mContext.getResources().getIdentifier(ollCase.getImagePath(), "drawable", mContext.getPackageName());
 
-        tvCaseName.setText(name);
+        tvCaseName.setText(ollCase.getCaseName());
         ivCaseImage.setImageResource(resourceId);
+
+        if(!MainActivity.isSelectedCasesDefault() && MainActivity.getSelectedCases().contains(ollCase)) {
+            convertView.setBackgroundColor(Color.GRAY);
+        }
 
         return convertView;
 

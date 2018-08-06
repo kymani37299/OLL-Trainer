@@ -70,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public static boolean isSelectedCasesDefault() {
+        return itemsSelected.isEmpty();
+    }
+
     public static ArrayList<OLLCase> getSelectedCases() {
         if(itemsSelected.isEmpty()) {
             return ollCases;
